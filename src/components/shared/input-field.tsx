@@ -2,12 +2,12 @@ import { propTypes } from "react-bootstrap/esm/Image"
 
 export default function InputField(props:{
     inputType?:string,
-    id:string,
-    className:string,
+    id?:string,
+    className?:string,
     autoCheck?:string,
     name?:string,
     defaultValue?:string,
-    onChange:any
+    onChange?:any
 }){
 
     return(

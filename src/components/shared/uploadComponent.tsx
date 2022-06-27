@@ -7,7 +7,7 @@ export default function UploadComponent() {
     return (
         <>
             <form onSubmit={submitInput}>
-                <input type="file" />
+                <input type="file" accept=".xls,.xlsx"/>
                 <p>Drag your files here or click in this area.</p>
                 <button type="submit">Upload</button>
             </form>

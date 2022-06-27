@@ -15,6 +15,7 @@
 }
 
 .survey_button{
+    margin:0;
     width: 25%;
     border-radius: 5px;
     box-sizing: border-box;
