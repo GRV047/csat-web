@@ -1,7 +1,13 @@
 import './css/dashboard.css';
 import Header from './filter/header';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
+    const nav = useNavigate();
+    function redirectToSurvey(e:any){
+        e.preventDefault();
+        nav("/survey")
+    }
     return (
         <>
             <div className="main_div">
@@ -14,7 +20,7 @@ export default function Dashboard() {
                             <h4>We always want to improve — could you help us out for a few minutes and let us know about your experience working with us?</h4>
                         </div>
                     </div>
-                    <button className="btn btn-dark mt-5">Sure, Let's Start</button>
+                    <button className="btn btn-dark mt-5 mb-4 button_margin" onClick={redirectToSurvey}>Sure, Let's Start</button>
                 </div>
             </div>
         </>

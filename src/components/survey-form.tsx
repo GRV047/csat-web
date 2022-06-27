@@ -27,8 +27,11 @@ export default function SurveyForm() {
         }
     })
 
-    const handelInput = () => {
+    const handelInput = (e:any) => {
+        const key=e.target.name;
+        const value=e.target.value;
 
+        setFormValue({...formValue,[key]:value});
     }
 
     const sumbmitForm = (event:any) => {

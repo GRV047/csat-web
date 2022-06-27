@@ -9,9 +9,10 @@ export default function SingleChoiceQuestion(props: any) {
     const contexData = SurveyContext()
     const {
         questionObject: {
+            _id,
             questionText,
             choices,
-            childQuestionOption,
+            expandableOptions,
             uniqueId,
             type,
             isParent,
@@ -48,7 +49,10 @@ export default function SingleChoiceQuestion(props: any) {
             question: questionText,
             response: value,
             uniqueId: uniqueId,
-            childQuestionOptions:childQuestionOption
+            expandableOptions:expandableOptions,
+            id:_id,
+            time:new Date().getTime(),
+            isParent:isParent
         })
     }
     //veriable declaration for storing multiple
@@ -56,9 +60,6 @@ export default function SingleChoiceQuestion(props: any) {
     const option: any = []
 
     console.log(contexData);
-
-
-
 
 
     // Creating and pushing all options value inside a Array
@@ -95,7 +96,7 @@ export default function SingleChoiceQuestion(props: any) {
                 childSchema &&
                 childSchema.length > 0 &&
                 response.length > 0 &&
-                (childQuestionOption.indexOf(response[count].selected) !== -1) &&
+                (expandableOptions.indexOf(response[count].selected) !== -1) &&
                 childSchema.map((val: any, i: number) =>
                     <div className="question_box mt-4" key={i}>
                         <SingleChoiceQuestion questionObject={val} />
