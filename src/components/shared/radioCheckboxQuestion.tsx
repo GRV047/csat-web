@@ -1,12 +1,12 @@
-import { useId, useState } from "react"
+import { useId, useReducer, useState } from "react"
+import Options from "./options"
 
-export default function RadioCheckboxComponent(){
+export default function RadioCheckboxComponent() {
     const id = useId()
 
-    const [option,setOption]=useState(["Option 1","Option 2"])
-
     
-    return(
+
+    return (
         <>
             <div className="container">
                 <div className="row">
@@ -14,7 +14,7 @@ export default function RadioCheckboxComponent(){
                 </div>
 
                 <div className="row">
-                    
+                    <Options/>
                 </div>
             </div>
         </>

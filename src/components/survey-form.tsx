@@ -3,20 +3,29 @@ import './css/survey-form.css';
 
 import Label from "./shared/label";
 import InputField from "./shared/input-field";
-import { useId, useState } from "react";
+import { useContext, useEffect, useId, useState } from "react";
 import SingleChoiceQuestion from "./shared/single-choice-question";
 import { dataSet } from "../dataset";
 import TextAreaSection from "./shared/textArea"
 
+import  { Survey } from "./context/surveyFormContext";
+import { questionContext } from "./context/questionContext";
+
 export default function SurveyForm() {
+    
+    const response = useContext(Survey);
+    const questionDataSet = useContext(questionContext)
     const questionArea: any = [];
     const id = useId()
     const [formValue, setFormValue] = useState({
         name: "",
         company: "",
-        email: ""
+        email: "",
+        commants:"",
+        customerId:""
     })
-
+    let questions = questionDataSet.questionObject;
+    console.log(questions)
     dataSet.forEach((element, i) => {
         if (element.type.toLowerCase() === "radio") {
             questionArea.push(
@@ -36,6 +45,21 @@ export default function SurveyForm() {
 
     const sumbmitForm = (event:any) => {
         event.preventDefault()
+        let parameter:any = {
+            name:formValue.name,
+            company:formValue.company,
+            email:formValue.email,
+            comments:formValue.commants,
+        };
+        let resArray: any[] = []
+        response.responseArray.forEach(element=>{
+            if(element.id !==''){
+                resArray.push(element);
+            }
+        })
+        
+        parameter.surveyResponse=resArray
+        console.log(parameter)
     }
 
     return (
@@ -79,10 +103,12 @@ export default function SurveyForm() {
 
                             <div className="row mt-5">
                                 <TextAreaSection id={id}
-                                    name={"commentReview"}
+                                    name={"commants"}
                                     rows={4}
                                     cols={40}
-                                    placeHolder={"Please enter your feedback"} />
+                                    placeHolder={"Please enter your feedback"}
+                                    value={formValue.commants}
+                                    onChange={handelInput} />
                             </div>
 
                             <div className="row button">

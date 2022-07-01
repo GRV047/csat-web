@@ -1,0 +1,23 @@
+
+.menu_container{
+    height:90vh
+}
+
+.button_handler{
+    margin-top: 0;
+    margin-left: 0;
+    width: 50%;
+    position: relative;
+    color: #fff;
+    background: #000000;
+    border: none;
+    height: 35px;
+    border-radius: 4px;
+    transition: all .2s ease;
+    outline: none;
+    bottom: 0;
+}
+
+.tabel_container{
+    overflow: auto;
+}

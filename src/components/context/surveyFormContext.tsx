@@ -23,7 +23,7 @@ type surveyContext = {
 }
 
 //Creating context hear with type defined
-const Survey = createContext<surveyContext>({
+export const Survey = createContext<surveyContext>({
     responseArray: [],
     setValue: (res: questions) => { }
 })
@@ -84,5 +84,6 @@ export const StateContainer = ({ children }: InputProviderProp) => {
 
 //Exporting instance of Use Context
 export default function SurveyContext() {
+    console.log('THIS',useContext(Survey))
     return useContext(Survey);
 }

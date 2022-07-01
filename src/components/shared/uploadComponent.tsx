@@ -1,8 +1,24 @@
 import "../css/emailComponent.css"
+import { read, utils } from "xlsx";
+import { scheduleSurvey } from "../../environment/models/surveyController";
 export default function UploadComponent() {
-    function submitInput(event:any){
+    let allData :any[];
+    async function submitInput(event:any){
         event.preventDefault();
-        console.log("THIS")
+        let workBook
+        let reader = new FileReader();
+        let file = event.target.value[0];
+        // file? reader.readAsBinaryString(file):null;
+        // reader.onload = async(event)=>{
+        //     const data = reader.result;
+        //     workBook = read(data,{type:"binary"});
+        //     const sheedData= utils.sheet_to_json(workBook.Sheets[workBook.SheetNames[0]]);
+        //     allData = sheedData;
+        // }
+
+        const response = await scheduleSurvey(file)
+
+        console.log(response)
     }
     return (
         <>

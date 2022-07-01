@@ -1,43 +1,26 @@
+import { useState } from 'react';
 import './css/createquestion.css'
+import DropDown from './shared/dropDown';
+import RadioCheckboxComponent from './shared/radioCheckboxQuestion';
 
-const typeArr: string[] = ["RADIO", "CHECKBOX", "BOOLEAN", "TEXT"]
+
 
 export function CreateQuestion() {
 
-    let typeSectionArr:any = [];
+    const [selected, setSelected] = useState("Choose One")
 
-    typeArr.forEach(element => {
-        typeSectionArr.push(
-            <div>
-                <QuestionTypeContainer typeText={element} />
-                <br />
-            </div>
-        )
-    })
     return (
         <>
             <div className="containerfluid">
                 <div className="row">
-                    <div className="col-lg-3">
-                        {typeSectionArr}
-                    </div>
-                    <div className="col-lg-9">
-                        
-                    </div>
+                    <DropDown selected={selected} setSelected={setSelected} />
+                </div>
+
+                <div className="row">
+                    <RadioCheckboxComponent />
                 </div>
             </div>
         </>
     )
 }
 
-const QuestionTypeContainer = (prop: {
-    typeText: string,
-}) => {
-    return (
-        <>
-            <div className="type__container">
-                <input type="button" name={prop.typeText} value={prop.typeText} />
-            </div>
-        </>
-    )
-}

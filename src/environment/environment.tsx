@@ -1,4 +1,4 @@
 export const ENVIRONMENT = {
-    url:"https://localhost8080",
+    url:"http://localhost:8080",
     type:"local"
 }   
