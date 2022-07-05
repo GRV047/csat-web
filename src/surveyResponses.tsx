@@ -2,7 +2,7 @@ const surveyReponse:any[]=[
     {
         templateName:"Template 1",
         customerName:"Gourav",
-        createdAt:new Date(),
+        createdAt:"20-02-2022",
         responseJson:[
             {
                 questionText:"How would you Rate This Structure ?",

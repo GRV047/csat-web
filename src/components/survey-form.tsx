@@ -10,6 +10,8 @@ import TextAreaSection from "./shared/textArea"
 
 import  { Survey } from "./context/surveyFormContext";
 import { questionContext } from "./context/questionContext";
+import { saveResponse } from "../environment/models/rsponse";
+import BooleanTeypeQuestion from "./shared/booleanTypeQuestion";
 
 export default function SurveyForm() {
     
@@ -24,15 +26,23 @@ export default function SurveyForm() {
         commants:"",
         customerId:""
     })
+    useEffect(()=>{
+        questionDataSet.getQuestion();
+    },[])
+
     let questions = questionDataSet.questionObject;
     console.log(questions)
-    dataSet.forEach((element, i) => {
-        if (element.type.toLowerCase() === "radio") {
+    questions.forEach((element, i) => {
+        if (element.type===2) {
             questionArea.push(
                 <div className="question_box mt-4" key={i}>
                     <SingleChoiceQuestion questionObject={element} />
                 </div>
             )
+        }else if(element.type ===4){
+            <div className="question_box mt-4">
+                <BooleanTeypeQuestion questionObject={element}/>
+            </div>
         }
     })
 
@@ -60,6 +70,8 @@ export default function SurveyForm() {
         
         parameter.surveyResponse=resArray
         console.log(parameter)
+
+        const res = saveResponse(formValue.customerId,parameter);
     }
 
     return (
@@ -121,3 +133,8 @@ export default function SurveyForm() {
         </>
     )
 }
+
+
+
+
+//isParent Key need to be maintain at DB in order to manage handeling in survey form context.

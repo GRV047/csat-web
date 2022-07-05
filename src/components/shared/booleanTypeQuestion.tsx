@@ -1,40 +1,30 @@
-import '../css/survey-form.css'
-import Label from './label'
-import { useId, useState } from 'react'
-import RadioInput from './radio-input'
-import SurveyContext from '../context/surveyFormContext'
+import { useContext, useId, useState } from "react"
+import Label from "./label"
+import RadioInput from "./radio-input"
+import SurveyContext from "../context/surveyFormContext"
 
+export default function BooleanTeypeQuestion(props:any){
 
-export default function SingleChoiceQuestion(props: any) {
-    const contexData = SurveyContext()
+    const contextData = SurveyContext()
+    const id = useId()
     const {
-        questionObject: {
+        questionObject:{
             _id,
             questionText,
             options,
             expandableOptions,
-            uniqueId,
-            type,
             isParent,
-            status,
             subquestions
         }
-    } = props || {}
-    console.log(uniqueId)
-    // ID Hook for generatingb dynamic ID
-    const id = useId();
+    }=props||{}
 
+    const [response,setResponse] = useState([{
+        selected:""
+    }])
+ 
 
-    // useState for setting the value from the form
-    const [response, setResponse] = useState([{
-        selected: ""
-    }]);
-
-
-    // Calling Event onChange; and setting value of selection
-    // From chield component
     let count = (response.length) - 1
-    const handelInput = (event: any) => {
+    function handelInput(event:any){
         const value = event.target.value;
 
         setResponse((prevRes: any) => [
@@ -45,7 +35,7 @@ export default function SingleChoiceQuestion(props: any) {
         ])
 
 
-        contexData.setValue({
+        contextData.setValue({
             question: questionText,
             response: value,
             uniqueId: _id,
@@ -55,12 +45,8 @@ export default function SingleChoiceQuestion(props: any) {
             isParent:isParent
         })
     }
-    //veriable declaration for storing multiple
-    // option templates
+
     const option: any = []
-
-    console.log(contexData);
-
 
     // Creating and pushing all options value inside a Array
     options.forEach((element: any, i: number) => {
@@ -77,7 +63,6 @@ export default function SingleChoiceQuestion(props: any) {
         )
     })
 
-    // Rendering this component
     return (
         <>
             <div className="question_container mt-5">
@@ -89,9 +74,6 @@ export default function SingleChoiceQuestion(props: any) {
                 {option}
             </div>
 
-            {/* *********************************************************************** */}
-            {/* Calling Recursion for this component for renduring same component */}
-            {/* *********************************************************************** */}
             {
                 subquestions &&
                 subquestions.length > 0 &&
@@ -99,11 +81,10 @@ export default function SingleChoiceQuestion(props: any) {
                 (expandableOptions.indexOf(response[count].selected) !== -1) &&
                 subquestions.map((val: any, i: number) =>
                     <div className="question_box mt-4" key={i}>
-                        <SingleChoiceQuestion questionObject={val} />
+                        <BooleanTeypeQuestion questionObject={val} />
                     </div>
                 )
             }
-
         </>
     )
 }

@@ -2,6 +2,8 @@ import './css/home.css'
 import { useEffect, useState } from 'react';
 import TableComponent from './shared/tabelComponent';
 import { getAllResponses, getResponseById } from '../environment/models/rsponse';
+import ResponseComponent from './shared/responseConponent';
+import surveyReponse from '../surveyResponses';
 
 
 
@@ -84,11 +86,15 @@ export default function SurveyReports() {
         let parameter = {
             responseId:e.target.value
         }
-        const response:any = await getResponseById(parameter);
+        // const response:any = await getResponseById(parameter);
 
-        if(response.length>0){
-            setViewTabel(false);
-        }
+        // if(response.length>0){
+        //     setViewTabel(false);
+        // }
+
+        // if(surveyReponse.length>0){
+        //     setViewTabel(false);
+        // }
     }
 
     return (
@@ -100,6 +106,13 @@ export default function SurveyReports() {
                             <TableComponent openDetails={openDetails} dataSource={responses} />
                         </div>
                     )
+                }
+                {
+                    viewTabel===false && (
+                        <div className="row mt-5 tabel_container">
+                            <ResponseComponent dataSource={surveyReponse}/>
+                        </div>
+                        )
                 }
             </div>
         </>

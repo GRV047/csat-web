@@ -96,3 +96,8 @@ export default function TableComponent(props: {
         </>
     )
 }
+
+export {
+    StyledTableCell,
+    StyledTableRow
+}

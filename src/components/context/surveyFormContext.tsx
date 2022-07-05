@@ -41,7 +41,6 @@ export const StateContainer = ({ children }: InputProviderProp) => {
         isParent:""
     }])
     function setValue(objects: questions) {
-        console.log("Hello World", objects)
         let index = 0;
         index = responseArray.length > 1 ?
             responseArray.findIndex(val => val.id === objects.id)
