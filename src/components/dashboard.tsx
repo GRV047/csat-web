@@ -14,11 +14,11 @@ export default function Dashboard() {
 
     function redirectToSurvey(e:any){
         e.preventDefault();
-        questionValues.getQuestion();
         let url = window.location.href;
         
         let splittedUrl = url.split('/');
         let count = splittedUrl.length-1
+        questionValues.getClientData(splittedUrl[count]);
         contextData.saveClientId(splittedUrl[count])
         nav("/survey")
     }

@@ -14,10 +14,15 @@ class Response{
     readonly getAll = this.common+'/all';
 }
 
+class Customer{
+    readonly common = apiAtEndpoint+'/customer'
+}
+
 class API{
     readonly Template = new Template();
     readonly Survey =new SurveyController();
     readonly Response = new Response();
+    readonly Customer = new Customer();
 }
 
 export const Endpoints=new API()
