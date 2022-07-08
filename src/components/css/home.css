@@ -21,3 +21,7 @@
 .tabel_container{
     overflow: auto;
 }
+
+.main_container{
+    margin-top: 20px;
+}

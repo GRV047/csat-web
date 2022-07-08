@@ -2,17 +2,24 @@ import './css/dashboard.css';
 import Header from './filter/header';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
-import { getTemplateById } from '../environment/models/template';
 import { questionContext } from './context/questionContext';
+import { Survey } from './context/surveyFormContext';
+
 
 export default function Dashboard() {
     const nav = useNavigate();
+    const contextData = useContext(Survey)
     let questions:any=[];
     let questionValues = useContext(questionContext);
 
     function redirectToSurvey(e:any){
         e.preventDefault();
-        questionValues.getQuestion();
+        let url = window.location.href;
+        
+        let splittedUrl = url.split('/');
+        let count = splittedUrl.length-1
+        questionValues.getClientData(splittedUrl[count]);
+        contextData.saveClientId(splittedUrl[count])
         nav("/survey")
     }
     return (

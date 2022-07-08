@@ -8,70 +8,118 @@ import SingleChoiceQuestion from "./shared/single-choice-question";
 import { dataSet } from "../dataset";
 import TextAreaSection from "./shared/textArea"
 
-import  { Survey } from "./context/surveyFormContext";
+import { Survey } from "./context/surveyFormContext";
 import { questionContext } from "./context/questionContext";
 import { saveResponse } from "../environment/models/rsponse";
 import BooleanTeypeQuestion from "./shared/booleanTypeQuestion";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function SurveyForm() {
-    
+
+    //Getting access to Survey Context
+    // All survey related oprations like saveing response and building final object done hear
     const response = useContext(Survey);
+
+    // getting Access to questionContext
+    // to get questions based on costomerId we are getting on the URL
     const questionDataSet = useContext(questionContext)
+
+
+    let customerDetails = questionDataSet.clientData.data ?? {
+        firstName: "",
+        lastName: "",
+        project: "",
+        email: ""
+    };
     const questionArea: any = [];
     const id = useId()
-    const [formValue, setFormValue] = useState({
-        name: "",
-        company: "",
-        email: "",
-        commants:"",
-        customerId:""
-    })
-    useEffect(()=>{
-        questionDataSet.getQuestion();
-    },[])
 
+    // setting Default values
+    const [formValue, setFormValue] = useState({
+        name: customerDetails.firstName + ' ' + customerDetails.lastName,
+        company: customerDetails.project,
+        email: customerDetails.email,
+        commants: ""
+    })
+
+    //    Ggetting Question Array of Object containig nested  object.
     let questions = questionDataSet.questionObject;
-    console.log(questions)
+
+    // condition check weate what type of question it is
     questions.forEach((element, i) => {
-        if (element.type===2) {
+        if (element.type === 2) {
             questionArea.push(
                 <div className="question_box mt-4" key={i}>
                     <SingleChoiceQuestion questionObject={element} />
                 </div>
             )
-        }else if(element.type ===4){
+        } else if (element.type === 4) {
             <div className="question_box mt-4">
-                <BooleanTeypeQuestion questionObject={element}/>
+                <BooleanTeypeQuestion questionObject={element} />
             </div>
         }
     })
 
-    const handelInput = (e:any) => {
-        const key=e.target.name;
-        const value=e.target.value;
+    // managing input state for Form Value
+    const handelInput = (e: any) => {
+        const key = e.target.name;
+        const value = e.target.value;
 
-        setFormValue({...formValue,[key]:value});
+        setFormValue({ ...formValue, [key]: value });
     }
 
-    const sumbmitForm = (event:any) => {
+
+    // Form Submit Operations
+    const sumbmitForm = async (event: any) => {
         event.preventDefault()
-        let parameter:any = {
-            name:formValue.name,
-            company:formValue.company,
-            email:formValue.email,
-            comments:formValue.commants,
+
+        // creating Final Object to be send on End point URL.
+
+        let parameter: any = {
+            name: formValue.name,
+            company: formValue.company,
+            email: formValue.email,
+            comments: formValue.commants,
         };
         let resArray: any[] = []
-        response.responseArray.forEach(element=>{
-            if(element.id !==''){
+        response.responseArray.forEach(element => {
+            if (element.id !== '') {
                 resArray.push(element);
             }
         })
-        
-        parameter.surveyResponse=resArray
-        console.log(parameter)
 
-        const res = saveResponse(formValue.customerId,parameter);
+        parameter.surveyResponse = resArray
+        parameter.customerId = response.clientId;
+
+        // getting Ip Aaddress of current device
+        const ip = await axios.get("https://api.ipify.org?format=json&callback=getIP");
+
+        // checking Final Object
+
+        parameter.ipAddress = ip.data.ip
+
+        // Consuming HTTP request for saving Data
+        const res: any = await saveResponse(parameter);
+
+        // handling success and faliour of http request.
+        if (res.status === 201) {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        } else {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Something went wrong',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
     }
 
     return (

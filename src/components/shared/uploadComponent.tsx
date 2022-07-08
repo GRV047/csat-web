@@ -1,33 +1,38 @@
 import "../css/emailComponent.css"
-import { read, utils } from "xlsx";
 import { scheduleSurvey } from "../../environment/models/surveyController";
-import { useState } from "react";
+import { useRef } from "react";
+
+import Swal from "sweetalert2";
+
 export default function UploadComponent() {
-    let allData: any[];
 
-    const [file, setFile] = useState('')
+    const inputFileRef: any = useRef(null);
     async function submitInput(event: any) {
-        event.preventDefault();
-        const response = await scheduleSurvey(file,event.target[0].files[0].name)
-
-        console.log(response)
-    }
-
-    function handeInput(e: any) {
-        setFile(e.target.value)
-        let file = e.target.files;
-        console.log(file)
-        let reader = new FileReader();
-        reader.readAsDataURL(file[0]);
-        reader.onload = (event:any)=>{
-            console.log("DATA",event.target.result)
-            setFile(event.target.result)
+        event.preventDefault()
+        try {
+            const response = await scheduleSurvey(inputFileRef.current.files[0])
+            if (response.status === 202) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Sending Mails',
+                    showConfirmButton: true,
+                })
+            }
+        } catch (err) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: "Previous survey request undergoing. Please wait.",
+                showConfirmButton: true,
+            })
         }
     }
+
     return (
         <>
             <form onSubmit={submitInput}>
-                <input type="file" accept=".xls,.xlsx" onChange={handeInput} />
+                <input type="file" accept=".xls,.xlsx" ref={inputFileRef} />
                 <p>Drag your files here or click in this area.</p>
                 <button type="submit">Upload</button>
             </form>

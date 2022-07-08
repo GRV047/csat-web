@@ -8,11 +8,14 @@ import '../css/home.css'
 
 
 export default function Navbar() {
+    function handelRout(e:any){
+
+    }
     return (
         <>
             <div className="menu_container">
                 <Link to="" style={{ textDecoration: 'none',color:'black' }}>
-                    <ListItemButton>
+                    <ListItemButton onClick={handelRout}>
                         <ListItemIcon>
                             <DashboardIcon />
                         </ListItemIcon>

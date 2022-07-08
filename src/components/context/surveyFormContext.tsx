@@ -13,19 +13,23 @@ type questions = {
     expandableOptions: string[];
     id: string,
     time: number,
-    isParent:string
+    isParent: string
 }
 
 //Creating Context type
 type surveyContext = {
     responseArray: any[],
+    clientId: string,
     setValue: (res: questions) => void
+    saveClientId: (id: string) => void
 }
 
 //Creating context hear with type defined
 export const Survey = createContext<surveyContext>({
     responseArray: [],
-    setValue: (res: questions) => { }
+    clientId: '',
+    setValue: (res: questions) => { },
+    saveClientId: (res: string) => { }
 })
 
 
@@ -38,23 +42,25 @@ export const StateContainer = ({ children }: InputProviderProp) => {
         uniqueId: "",
         id: "",
         time: new Date().getTime(),
-        isParent:""
+        isParent: ""
     }])
+
+    const [clientId, setClientId] = useState('');
+
     function setValue(objects: questions) {
         let index = 0;
         index = responseArray.length > 1 ?
             responseArray.findIndex(val => val.id === objects.id)
             : 0;
         if (index > 0) {
-            responseArray[index].response=objects.response;
-            responseArray[index].time=objects.time;
+            responseArray[index].response = objects.response;
+            responseArray[index].time = objects.time;
             for (let i = index; i < responseArray.length; i++) {
                 const element = responseArray[i];
-                if(element.isParent.toLowerCase()==="no"){
-                    responseArray.splice(i,1);
+                if (element.isParent.toLowerCase() === "no") {
+                    responseArray.splice(i, 1);
                 }
             }
-            console.log(responseArray[index+1])
 
         } else {
             setResponseArray(prevState => [
@@ -64,16 +70,20 @@ export const StateContainer = ({ children }: InputProviderProp) => {
                     "uniqueId": objects.uniqueId,
                     "id": objects.id,
                     "time": objects.time,
-                    "isParent":objects.isParent
+                    "isParent": objects.isParent
                 }
             ]);
         }
 
     }
 
+    function saveClientId(id:string){
+        setClientId(id);
+    }
+
     return (
         <>
-            <Survey.Provider value={{ setValue, responseArray }}>
+            <Survey.Provider value={{ setValue, responseArray, clientId, saveClientId }}>
                 {children}
             </Survey.Provider>
         </>
@@ -83,6 +93,5 @@ export const StateContainer = ({ children }: InputProviderProp) => {
 
 //Exporting instance of Use Context
 export default function SurveyContext() {
-    console.log('THIS',useContext(Survey))
     return useContext(Survey);
 }
