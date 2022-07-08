@@ -23,15 +23,16 @@ export default function SurveyForm() {
         name: "",
         company: "",
         email: "",
-        commants:"",
-        customerId:""
+        commants:""
     })
+
+
     useEffect(()=>{
         questionDataSet.getQuestion();
     },[])
-
+   
     let questions = questionDataSet.questionObject;
-    console.log(questions)
+
     questions.forEach((element, i) => {
         if (element.type===2) {
             questionArea.push(
@@ -69,9 +70,16 @@ export default function SurveyForm() {
         })
         
         parameter.surveyResponse=resArray
+        parameter.customerId=response.clientId;
         console.log(parameter)
 
-        const res = saveResponse(formValue.customerId,parameter);
+        const res:any = saveResponse(parameter);
+
+        if(res.status === 200){
+            alert('Successfully saved')
+        }else{
+            alert('Something went wrong')
+        }
     }
 
     return (

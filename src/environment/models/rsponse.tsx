@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Endpoints } from "../api";
 
-export async function saveResponse(customerId:string,parameter:{}){
-    const url=Endpoints.Response.common+`/${customerId}`;
+export async function saveResponse(parameter:any){
+    const url=Endpoints.Response.common+`/${parameter.customerId}`;
     return await axios.post(url,parameter)
 }
 

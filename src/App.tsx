@@ -17,13 +17,13 @@ function App() {
       <StateContainer>
         <QuestionContainer>
           <Routes>
-            <Route index element={<Dashboard />} />
+            <Route index element={<HomeComponent />} />
             <Route path="home" element={<HomeComponent />}>
               <Route path="sendEmail" element={<EmailComponent />} />
               <Route path="createQuestion" element={<CreateQuestion />} />
-              <Route path="surveyReports" element={<SurveyReports/>} />
+              <Route path="surveyReports" element={<SurveyReports />} />
             </Route>
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="customer/:id" element={<Dashboard />} />
             <Route path="survey" element={<SurveyForm />} />
           </Routes>
         </QuestionContainer>

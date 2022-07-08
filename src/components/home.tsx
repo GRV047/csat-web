@@ -18,6 +18,7 @@ import MuiDrawer from '@mui/material/Drawer';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { Outlet } from "react-router-dom";
+import './css/home.css';
 
 
 const drawerWidth = 240;
@@ -139,7 +140,7 @@ export default function HomeComponent() {
                         </List>
                     </Drawer>
 
-                    <Container>
+                    <Container className="main_container">
 
                         <Grid container spacing={3}>
                             {/* Chart */}
@@ -151,14 +152,16 @@ export default function HomeComponent() {
                                         flexDirection: 'column',
                                     }}
                                 >
+                                    <div className="container mt-5">
+                                        <div className="row">
+                                            <h1>HELLO</h1>
+                                        </div>
+                                    </div>
                                     <Outlet />
+                                    
                                 </Paper>
                             </Grid>
-
-
-
                         </Grid>
-
                     </Container>
                 </Box>
             </ThemeProvider>

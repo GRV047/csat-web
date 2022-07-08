@@ -20,7 +20,7 @@ export default function SingleChoiceQuestion(props: any) {
             subquestions
         }
     } = props || {}
-    console.log(uniqueId)
+
     // ID Hook for generatingb dynamic ID
     const id = useId();
 
@@ -58,8 +58,6 @@ export default function SingleChoiceQuestion(props: any) {
     //veriable declaration for storing multiple
     // option templates
     const option: any = []
-
-    console.log(contexData);
 
 
     // Creating and pushing all options value inside a Array

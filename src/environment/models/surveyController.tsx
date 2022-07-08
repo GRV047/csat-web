@@ -1,7 +1,19 @@
 import axios from "axios";
 import { Endpoints } from "../api";
 
-export async function scheduleSurvey(object:any,fileNam:string){
+export async function scheduleSurvey(file:any){
     const url = Endpoints.Survey.getCustomer
-    return await axios.post(url,object);
+    var bodyFormData =  new FormData();
+    bodyFormData.append('customers',file)
+    console.log(bodyFormData)
+    return await axios.post(url,bodyFormData);
+
+    // return await axios({
+    //     method:"post",
+    //     url:url,
+    //     data:bodyFormData,
+    //     headers:{
+    //         "Content-Type":"multipart/form-data"
+    //     }
+    // })
 }
