@@ -10,22 +10,28 @@ import { CreateQuestion } from './components/questionCreation';
 import { QuestionContainer } from './components/context/questionContext';
 import HomeComponent from './components/home';
 import SurveyReports from './components/surveyReports';
+import { HomeContainer } from './components/context/homePageContext';
+import {  RreportContainer } from './components/context/reportsContext';
 
 function App() {
   return (
     <div>
       <StateContainer>
         <QuestionContainer>
-          <Routes>
-            <Route index element={<HomeComponent />} />
-            <Route path="home" element={<HomeComponent />}>
-              <Route path="sendEmail" element={<EmailComponent />} />
-              <Route path="createQuestion" element={<CreateQuestion />} />
-              <Route path="surveyReports" element={<SurveyReports />} />
-            </Route>
-            <Route path="customer/:id" element={<Dashboard />} />
-            <Route path="survey" element={<SurveyForm />} />
-          </Routes>
+          <HomeContainer>
+            <RreportContainer>
+            <Routes>
+              <Route index element={<HomeComponent />} />
+              <Route path="home" element={<HomeComponent />}>
+                <Route path="sendEmail" element={<EmailComponent />} />
+                <Route path="createQuestion" element={<CreateQuestion />} />
+                <Route path="surveyReports" element={<SurveyReports />} />
+              </Route>
+              <Route path="customer/:id" element={<Dashboard />} />
+              <Route path="survey" element={<SurveyForm />} />
+            </Routes>
+            </RreportContainer>
+          </HomeContainer>
         </QuestionContainer>
       </StateContainer>
     </div>

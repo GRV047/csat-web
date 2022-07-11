@@ -31,12 +31,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function createData(
     name: string,
-    templateName: string,
-    status: string,
-    date: string,
+    account: string,
+    project: string,
+    email: string,
     id: string,
 ) {
-    return { name, templateName, status, date, id };
+    return { name, account, project, email, id };
 }
 
 
@@ -46,17 +46,19 @@ export default function TableComponent(props: {
 }) {
 
     const rows = props.dataSource.map((element: {
-        name: string,
-        templateName: string,
-        status: string,
-        date: string,
-        id: string,
+        firstName: string,
+        lastName:string,
+        account:string,
+        email:string,
+        isActive:boolean,
+        project: string,
+        _id: string,
     }) => {
-        return createData(element.name,
-            element.templateName,
-            element.status,
-            element.date,
-            element.id);
+        return createData(element.firstName+' '+element.lastName,
+            element.account,
+            element.project,
+            element.email,
+            element._id);
     });
 
     return (
@@ -67,9 +69,9 @@ export default function TableComponent(props: {
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>Client Name</StyledTableCell>
-                                <StyledTableCell align="center">Template Name</StyledTableCell>
-                                <StyledTableCell align="center">Status</StyledTableCell>
-                                <StyledTableCell align="center">Date</StyledTableCell>
+                                <StyledTableCell align="center">Account</StyledTableCell>
+                                <StyledTableCell align="center">Project Name</StyledTableCell>
+                                <StyledTableCell align="center">Email</StyledTableCell>
                                 <StyledTableCell align="center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
@@ -79,9 +81,9 @@ export default function TableComponent(props: {
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="center">{row.templateName}</StyledTableCell>
-                                    <StyledTableCell align="center">{row.status}</StyledTableCell>
-                                    <StyledTableCell align="center">{row.date}</StyledTableCell>
+                                    <StyledTableCell align="center">{row.account}</StyledTableCell>
+                                    <StyledTableCell align="center">{row.project}</StyledTableCell>
+                                    <StyledTableCell align="center">{row.email}</StyledTableCell>
                                     <StyledTableCell align="center">
                                         <button className='button_handler' onClick={props.openDetails} value={row.id}>
                                             view

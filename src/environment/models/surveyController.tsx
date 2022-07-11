@@ -7,13 +7,4 @@ export async function scheduleSurvey(file:any){
     bodyFormData.append('customers',file)
     console.log(bodyFormData)
     return await axios.post(url,bodyFormData);
-
-    // return await axios({
-    //     method:"post",
-    //     url:url,
-    //     data:bodyFormData,
-    //     headers:{
-    //         "Content-Type":"multipart/form-data"
-    //     }
-    // })
 }

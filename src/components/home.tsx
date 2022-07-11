@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
@@ -19,6 +19,8 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { Outlet } from "react-router-dom";
 import './css/home.css';
+import { HomeContext } from "./context/homePageContext";
+import { MainDashboard } from "./mainDashboard";
 
 
 const drawerWidth = 240;
@@ -27,8 +29,8 @@ const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
-    color:"white",
-    background:"black",
+    color: "white",
+    background: "black",
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -72,8 +74,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function HomeComponent() {
-
-
+    const homeContext = useContext(HomeContext)
+    console.log(homeContext.isVisible)
     const [open, setOpen] = useState(true);
 
     const toggleDrawer = () => {
@@ -152,13 +154,15 @@ export default function HomeComponent() {
                                         flexDirection: 'column',
                                     }}
                                 >
-                                    <div className="container mt-5">
-                                        <div className="row">
-                                            <h1>HELLO</h1>
-                                        </div>
-                                    </div>
+                                    {
+                                        homeContext.isVisible === true && (
+                                            <div className="container mt-5">
+                                                <MainDashboard/>
+                                            </div>
+                                        )
+                                    }
                                     <Outlet />
-                                    
+
                                 </Paper>
                             </Grid>
                         </Grid>

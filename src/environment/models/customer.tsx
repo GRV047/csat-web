@@ -1,7 +1,12 @@
 import axios from "axios";
 import { Endpoints } from "../api";
 
-export function getCustomerById(id:string){
+export async function getCustomerById(id:string){
     const url = Endpoints.Customer.common+`/${id}`
-    return axios.get(url);
+    return await axios.get(url);
+}
+
+export async function getAllCustomer(filter:any) {
+    const url = Endpoints.Customer.getAllCustomer+`?${JSON.stringify(filter)}`;
+    return await axios.get(url);
 }

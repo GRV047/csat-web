@@ -132,7 +132,7 @@ export default function SurveyForm() {
                             <div className="row">
                                 <div className="col-lg-4">
                                     <Label labelName="name"
-                                        className="form-label" text="First Name, Last Name" />
+                                        className="form-label" text="Name" />
                                     <InputField id="name"
                                         className="form-control"
                                         defaultValue={formValue.name}
@@ -140,7 +140,7 @@ export default function SurveyForm() {
                                 </div>
                                 <div className="col-lg-4">
                                     <Label labelName="company"
-                                        className="form-label" text="Company" />
+                                        className="form-label" text="Company / Project" />
                                     <InputField id="company"
                                         className="form-control"
                                         defaultValue={formValue.company}
@@ -181,8 +181,5 @@ export default function SurveyForm() {
         </>
     )
 }
-
-
-
 
 //isParent Key need to be maintain at DB in order to manage handeling in survey form context.

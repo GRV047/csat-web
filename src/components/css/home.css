@@ -25,3 +25,202 @@
 .main_container{
     margin-top: 20px;
 }
+
+
+/* 
+body{
+    margin-top:20px;
+    background:#FAFAFA;
+}
+.order-card {
+    color: #fff;
+}
+
+.bg-c-blue {
+    background: linear-gradient(45deg,#4099ff,#73b4ff);
+}
+
+.bg-c-green {
+    background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+}
+
+.bg-c-yellow {
+    background: linear-gradient(45deg,#FFB64D,#ffcb80);
+}
+
+.bg-c-pink {
+    background: linear-gradient(45deg,#FF5370,#ff869a);
+}
+
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.card .card-block {
+    padding: 25px;
+}
+
+.order-card i {
+    font-size: 26px;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+} */
+
+.card{
+    height:150px;
+}
+
+
+.card :hover {
+        box-shadow: -1px 0px 7px 1px #cdcdd6, 0px 3px 4px 1px #aba7a7;
+        animation: move 1s ease-in-out 1s alternate both;
+        animation-delay: 0s;
+    }
+
+
+/* // @keyframes move {
+//   100% {
+//     transform: translatey(-15px);
+//   }
+// } */
+.has-background-gradient-green {
+    background: linear-gradient(90deg, #90d472 0%, #5ec85a 66%);
+    color: white;
+}
+
+.has-background-gradient-green.my-icon {
+    background: rgba(147, 223, 148, 0.9);
+}
+
+.has-background-gradient-yellow {
+    background: linear-gradient(90deg, #e9e651 0%, #dddb5b 66%);
+    color: white;
+}
+
+.has-background-gradient-yellow.my-icon {
+    background: rgba(240, 243, 58, 0.9);
+}
+
+.has-background-gradient-blue {
+    background: rgb(179, 186, 255);
+    background: linear-gradient(90deg, rgba(179, 186, 255, 1) 0%, rgba(125, 143, 255, 1) 66%);
+    color: white;
+}
+
+.has-background-gradient-blue.my-icon{
+    background: rgba(179, 186, 255, 0.9);
+}
+
+
+.has-background-gradient-brown {
+    background: #fd676b;
+    background: linear-gradient(90deg, #fd676b, #b83336 66%);
+    color: white;
+}
+
+.has-background-gradient-brown.my-icon{
+    background: #fd676b;
+}
+
+.has-background-gradient-teal {
+    background: rgb(182, 225, 221);
+    background: linear-gradient(90deg, #48c5b6 0%, rgba(38, 166, 154, 1) 66%);
+    color: white;
+}
+
+.has-background-gradient-teal.my-icon{
+    background: rgb(97, 190, 182)
+}
+
+.has-background-gradient-green {
+    background: linear-gradient(90deg, #90d472 0%, #5ec85a 66%);
+    color: white;
+}
+
+.has-background-gradient-green.my-card{
+    background: rgba(147, 223, 148, 0.9);
+}
+
+.has-background-gradient-bronze {
+    background: linear-gradient( 90deg, #cd7f32e3 0%, #cd7f32 66%);
+    color: white;
+}
+
+.has-background-gradient-bronze.my-icon{
+    background: #d49251
+}
+
+.has-background-gradient-silver {
+    background: linear-gradient( 90deg, #d2d2d2 0%, #c0c0c0 66%);
+    color: white;
+}
+
+.has-background-gradient-silver.my-icon{
+    background: #d4d3d3
+}
+
+.has-background-gradient-gold {
+    background: linear-gradient( 90deg, #d4af37c2 0%, #d4af37 66%);
+    color: white;
+}
+
+.has-background-gradient-gold.my-icon {
+    background: #e2c25b
+}
+
+.has-background-gradient-pink {
+    background: linear-gradient( 90deg,  #ea12f1, #cc41c0 66%);
+    color: white;
+}
+
+.has-background-gradient-pink.my-icon {
+    background: #df59c2
+} 
+
+.card {
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.my-card {
+    min-height: 60px;
+    margin-top: 13px;
+    border: none;
+    display: flex;
+}
+
+.my-card.left-value {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    white-space: pre;
+}
+
+.my-card.right-value {
+    white-space: pre;
+}
+
+.my-card .my-icon {
+    border-radius: 8px;
+    font-size: 34px;
+}
+
+.card-name {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.my-card h2 {
+    margin-bottom: 0;
+}
