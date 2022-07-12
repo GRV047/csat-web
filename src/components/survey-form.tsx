@@ -3,9 +3,8 @@ import './css/survey-form.css';
 
 import Label from "./shared/label";
 import InputField from "./shared/input-field";
-import { useContext, useEffect, useId, useState } from "react";
+import { useContext, useId, useState } from "react";
 import SingleChoiceQuestion from "./shared/single-choice-question";
-import { dataSet } from "../dataset";
 import TextAreaSection from "./shared/textArea"
 
 import { Survey } from "./context/surveyFormContext";
@@ -14,8 +13,11 @@ import { saveResponse } from "../environment/models/rsponse";
 import BooleanTeypeQuestion from "./shared/booleanTypeQuestion";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function SurveyForm() {
+
+    const nav = useNavigate();
 
     //Getting access to Survey Context
     // All survey related oprations like saveing response and building final object done hear
@@ -25,6 +27,7 @@ export default function SurveyForm() {
     // to get questions based on costomerId we are getting on the URL
     const questionDataSet = useContext(questionContext)
 
+    console.log(questionDataSet.clientData)
 
     let customerDetails = questionDataSet.clientData.data ?? {
         firstName: "",
@@ -108,8 +111,10 @@ export default function SurveyForm() {
                 position: 'center',
                 icon: 'success',
                 title: 'Your work has been saved',
-                showConfirmButton: false,
+                showConfirmButton: true,
                 timer: 2000
+            }).then(res=>{
+                nav("/exitPage");
             })
         } else {
             Swal.fire({
