@@ -12,6 +12,7 @@ import HomeComponent from './components/home';
 import SurveyReports from './components/surveyReports';
 import { HomeContainer } from './components/context/homePageContext';
 import {  RreportContainer } from './components/context/reportsContext';
+import SurveyExitPage from './components/surveyExitPage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               </Route>
               <Route path="customer/:id" element={<Dashboard />} />
               <Route path="survey" element={<SurveyForm />} />
+              <Route path="exitPage" element={<SurveyExitPage />} />
             </Routes>
             </RreportContainer>
           </HomeContainer>

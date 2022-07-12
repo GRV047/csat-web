@@ -1,7 +1,7 @@
 import './css/dashboard.css';
 import Header from './filter/header';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { questionContext } from './context/questionContext';
 import { Survey } from './context/surveyFormContext';
 
@@ -18,9 +18,14 @@ export default function Dashboard() {
         
         let splittedUrl = url.split('/');
         let count = splittedUrl.length-1
-        questionValues.getClientData(splittedUrl[count]);
-        contextData.saveClientId(splittedUrl[count])
-        nav("/survey")
+        contextData.saveClientId(splittedUrl[count]) //new Changes
+
+        questionValues.getClientData(splittedUrl[count]); //Old Convension. Although getting all details which are required
+
+        console.log(questionValues.clientData)
+        if(questionValues.clientData.data){
+            nav("/survey")
+        }
     }
     return (
         <>
