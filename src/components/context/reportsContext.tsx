@@ -11,24 +11,30 @@ type reports = {
     setAllSurveyData: () => void,
     allCustomer: any[],
     setAllCustomerData: () => void
+    allResponse: any[],
+    setAllResponsesData: (param:any) => void
 }
 
 export const ReportContext = createContext<reports>({
     allSurvey: [],
     setAllSurveyData: () => { },
     allCustomer: [],
-    setAllCustomerData: () => { }
+    setAllCustomerData: () => { },
+    allResponse: [],
+    setAllResponsesData: (param:any) => { }
 })
 
 export function RreportContainer({ children }: InputProviderProp) {
 
     const [allSurvey, setAllSurvey] = useState([]);
 
-    const [allCustomer,setAllCustomer] = useState([]);
+    const [allCustomer, setAllCustomer] = useState([]);
 
-    async function setAllCustomerData(){
-        let response:any = await getAllCustomer({
-            skip:100,take:100
+    const [allResponse , setAllResponse] = useState([]);
+
+    async function setAllCustomerData() {
+        let response: any = await getAllCustomer({
+            skip: 100, take: 100
         })
 
         setAllCustomer(response.data.data);
@@ -39,9 +45,18 @@ export function RreportContainer({ children }: InputProviderProp) {
 
         setAllSurvey(responses.data.data);
     }
+
+    async function setAllResponsesData(param:any) {
+        setAllResponse(param)
+    }
     return (
         <>
-            <ReportContext.Provider value={{ allSurvey, setAllSurveyData, allCustomer, setAllCustomerData }}>
+            <ReportContext.Provider value={{ allSurvey, 
+                setAllSurveyData, 
+                allCustomer, 
+                setAllCustomerData,
+                allResponse,
+                setAllResponsesData }}>
                 {children}
             </ReportContext.Provider>
         </>

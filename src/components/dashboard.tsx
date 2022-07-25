@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { questionContext } from './context/questionContext';
 import { Survey } from './context/surveyFormContext';
+import { getCustomerById } from '../environment/models/customer';
 
 
 export default function Dashboard() {
@@ -12,20 +13,30 @@ export default function Dashboard() {
     let questions:any=[];
     let questionValues = useContext(questionContext);
 
-    function redirectToSurvey(e:any){
+    async function redirectToSurvey(e:any){
         e.preventDefault();
         let url = window.location.href;
         
         let splittedUrl = url.split('/');
         let count = splittedUrl.length-1
         contextData.saveClientId(splittedUrl[count]) //new Changes
-
-        questionValues.getClientData(splittedUrl[count]); //Old Convension. Although getting all details which are required
-
-        console.log(questionValues.clientData)
-        if(questionValues.clientData.data){
-            nav("/survey")
+        const setQuestionValues = await getData(splittedUrl[count]); //Old Convension. Although getting all details which are required
+        questionValues.setValue(setQuestionValues)        
+        console.log("This==>",setQuestionValues.data.data.template.templateJson)
+        if(setQuestionValues.data.data.template.templateJson){
+            setTimeout(()=>{
+                nav("/survey")
+            },1000)
         }
+    }
+
+    function getData(id:string):Promise<any>{
+        return new Promise(async(resolve,reject)=>{
+            // const res = questionValues.getClientData(id)
+            const response = await getCustomerById(id);
+
+            if(response) resolve(response)
+        })
     }
     return (
         <>

@@ -8,16 +8,14 @@ interface InputProviderProp {
 
 type question = {
     questionObject: any[],
-    getQuestion: (id: string) => void,
-    getClientData: (id: string) => void,
     clientData: any
+    setValue: (params:any) => void,
 }
 
 export const questionContext = createContext<question>({
     questionObject: [],
-    getQuestion: (id: string) => { },
-    getClientData: (id: string) => { },
-    clientData: []
+    clientData: [],
+    setValue: (params:any) => { }
 })
 export function QuestionContainer({ children }: InputProviderProp) {
 
@@ -27,24 +25,17 @@ export function QuestionContainer({ children }: InputProviderProp) {
 
     let questions: any
 
-    async function getQuestion(id: string) {
-        questions = await getTemplateById(id);
-        //"62bc5101cdd79e5f9ba6d694"
+    function setValue(params:any){
+        setQuestionObject(params.data.data.template.templateJson);
 
-        setQuestionObject(questions.data.data.templateJson);
+        setClientData(params.data.data)
+    }
 
-        console.log(questions)
-    }
-    let client:any
-    async function getClientData(id: string) {
-        client = await getCustomerById(id);
-        setClientData(client.data);
-        getQuestion(client.data.data.template._id)
-    }
+
 
     return (
         <>
-            <questionContext.Provider value={{ questionObject, getQuestion, getClientData, clientData }}>
+            <questionContext.Provider value={{ questionObject, setValue, clientData }}>
                 {children}
             </questionContext.Provider>
         </>

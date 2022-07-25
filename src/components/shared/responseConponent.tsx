@@ -9,35 +9,55 @@ import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import TableRow from '@mui/material/TableRow';
+import { useContext } from 'react';
+import { ReportContext } from '../context/reportsContext';
+import { getResponseByClientId } from '../../environment/models/rsponse';
 
 function createData(
-    templateName: string,
+    fileName: string,
+    createdAt: any,
+    reportId:string,
     customerName: string,
-    createdAt: string,
-    responseJson: object[]
+    projectName: string,
+    customerId: string
 ) {
-    let data={}
-    console.log(responseJson)
-    
-    return data;
+    let date = createdAt
+    return { fileName, createdAt, reportId, customerName, projectName, customerId };
 }
 
 export default function ResponseComponent(props: {
-    dataSource: any
+    dataSource: any,
+    customerDetails: any
 }) {
-    console.log("inside",props.dataSource)
+    const reportContext = useContext(ReportContext)
+
     const rows = props.dataSource.map((element: {
-        templateName: string,
-        customerName: string,
+        fileName: string,
         createdAt: string,
-        responseJson: object[]
+        _id:string
     }) => {
-        return createData(element.templateName,
-            element.customerName,
-            (element.createdAt).toString(),
-            element.responseJson)
+        return createData(
+            element.fileName,
+            element.createdAt,
+            element._id,
+            props.customerDetails.firstName + ' ' + props.customerDetails.lastName,
+            props.customerDetails.project,
+            props.customerDetails._id
+        )
     });
 
+    async function viewResponses(e: any) {
+        e.preventDefault();
+        console.log(e.target.value)
+        // let param = {
+        //     clientId: (e.target.value).toString()
+        // }
+        // const response = await getResponseByClientId(param)
+
+        // reportContext.setAllResponsesData(response);
+    }
+
+    console.log(rows)
     return (
         <>
             <div style={{ height: 400, width: '100%' }} className="mt-5">
@@ -45,29 +65,25 @@ export default function ResponseComponent(props: {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell>Template Name</StyledTableCell>
-                                <StyledTableCell align="center">Customer Name</StyledTableCell>
-                                <StyledTableCell align="center">Submission Date</StyledTableCell>
-                                <StyledTableCell align="center">Question Text</StyledTableCell>
-                                <StyledTableCell align="center">Response</StyledTableCell>
+                                <StyledTableCell>File Name</StyledTableCell>
+                                <StyledTableCell align="center">Created At</StyledTableCell>
+                                <StyledTableCell align="center">Client Name  </StyledTableCell>
+                                <StyledTableCell align="center">Project Name</StyledTableCell>
+                                <StyledTableCell align="center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {rows.map((row: any) => (
-                                <StyledTableRow key={row.templateName}>
-                                    <StyledTableCell component="th" scope="row">{row.templateName}</StyledTableCell>
-                                    <StyledTableCell align="center">{row.customerName}</StyledTableCell>
+                                <StyledTableRow key={row.fileName}>
+                                    <StyledTableCell component="th" scope="row">{row.fileName}</StyledTableCell>
                                     <StyledTableCell align="center">{row.createdAt}</StyledTableCell>
-                                    {
-                                        row.templateJson.map((x: any) => {
-                                            (
-                                                <>
-                                                    <StyledTableCell align="center">{x.questionText}</StyledTableCell>
-                                                    <StyledTableCell align="center">{x.response}</StyledTableCell>
-                                                </>
-                                            )
-                                        })
-                                    }
+                                    <StyledTableCell align="center">{row.customerName}</StyledTableCell>
+                                    <StyledTableCell align="center">{row.projectName}</StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        <button className='button_handler' onClick={viewResponses} value={row.reportId}>
+                                            view
+                                        </button>
+                                    </StyledTableCell>
                                 </StyledTableRow>
                             ))}
                         </TableBody>

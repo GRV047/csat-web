@@ -10,3 +10,8 @@ export async function getAllCustomer(filter:any) {
     const url = Endpoints.Customer.getAllCustomer+`?${JSON.stringify(filter)}`;
     return await axios.get(url);
 }
+
+export async function getCustomer(filter:any) {
+    const url = `${Endpoints.Customer.common}/${filter.where._id}`;
+    return await axios.get(url);
+}

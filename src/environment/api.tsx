@@ -14,6 +14,7 @@ class SurveyController {
 class Response {
     readonly common = apiAtEndpoint + '/response';
     readonly getAll = this.common + '/all';
+    readonly getResponseById = this.common+'/getResponseById'
 }
 
 class Customer {
