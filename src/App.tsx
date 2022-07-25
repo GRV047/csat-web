@@ -22,7 +22,7 @@ function App() {
           <HomeContainer>
             <RreportContainer>
             <Routes>
-              <Route index element={<HomeComponent />} />
+              {/* <Route index element={<HomeComponent />} /> */}
               <Route path="home" element={<HomeComponent />}>
                 <Route path="sendEmail" element={<EmailComponent />} />
                 <Route path="createQuestion" element={<CreateQuestion />} />

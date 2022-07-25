@@ -29,7 +29,8 @@ export default function SurveyForm() {
 
     console.log(questionDataSet.clientData)
 
-    let customerDetails = questionDataSet.clientData.data ?? {
+
+    let customerDetails = questionDataSet.clientData ?? {
         firstName: "",
         lastName: "",
         project: "",
@@ -103,6 +104,7 @@ export default function SurveyForm() {
         parameter.ipAddress = ip.data.ip
 
         // Consuming HTTP request for saving Data
+        console.log(parameter)
         const res: any = await saveResponse(parameter);
 
         // handling success and faliour of http request.
