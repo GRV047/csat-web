@@ -12,32 +12,37 @@ import TableRow from '@mui/material/TableRow';
 import { useContext } from 'react';
 import { ReportContext } from '../context/reportsContext';
 import { getResponseByClientId } from '../../environment/models/rsponse';
+import { useNavigate } from 'react-router-dom';
 
 function createData(
     fileName: string,
+    surveyName:string,
     createdAt: any,
-    reportId:string,
+    surveyId:string,
     customerName: string,
     projectName: string,
     customerId: string
 ) {
-    let date = createdAt
-    return { fileName, createdAt, reportId, customerName, projectName, customerId };
+    return { fileName, surveyName, createdAt, surveyId, customerName, projectName, customerId };
 }
 
 export default function ResponseComponent(props: {
     dataSource: any,
     customerDetails: any
 }) {
+    const nav = useNavigate();
+
     const reportContext = useContext(ReportContext)
 
     const rows = props.dataSource.map((element: {
         fileName: string,
         createdAt: string,
+        surveyName:string,
         _id:string
     }) => {
         return createData(
             element.fileName,
+            element.surveyName?element.surveyName:'---', //ADDED Survey Name
             element.createdAt,
             element._id,
             props.customerDetails.firstName + ' ' + props.customerDetails.lastName,
@@ -49,12 +54,15 @@ export default function ResponseComponent(props: {
     async function viewResponses(e: any) {
         e.preventDefault();
         console.log(e.target.value)
-        // let param = {
-        //     clientId: (e.target.value).toString()
-        // }
-        // const response = await getResponseByClientId(param)
+        let param = {
+            surveyId: e.target.value,
+            clientId: props.customerDetails._id
+        }
+        const response = await getResponseByClientId(param)
 
-        // reportContext.setAllResponsesData(response);
+        reportContext.setAllResponsesData(response.data.data);
+
+        nav("/responseComponent");
     }
 
     console.log(rows)
@@ -66,6 +74,7 @@ export default function ResponseComponent(props: {
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>File Name</StyledTableCell>
+                                <StyledTableCell align="center">Survey Name</StyledTableCell>
                                 <StyledTableCell align="center">Created At</StyledTableCell>
                                 <StyledTableCell align="center">Client Name  </StyledTableCell>
                                 <StyledTableCell align="center">Project Name</StyledTableCell>
@@ -76,11 +85,12 @@ export default function ResponseComponent(props: {
                             {rows.map((row: any) => (
                                 <StyledTableRow key={row.fileName}>
                                     <StyledTableCell component="th" scope="row">{row.fileName}</StyledTableCell>
+                                    <StyledTableCell align="center">{row.surveyName?row.surveyName:'---'}</StyledTableCell>
                                     <StyledTableCell align="center">{row.createdAt}</StyledTableCell>
                                     <StyledTableCell align="center">{row.customerName}</StyledTableCell>
                                     <StyledTableCell align="center">{row.projectName}</StyledTableCell>
                                     <StyledTableCell align="center">
-                                        <button className='button_handler' onClick={viewResponses} value={row.reportId}>
+                                        <button className='button_handler' onClick={viewResponses} value={row.surveyId}>
                                             view
                                         </button>
                                     </StyledTableCell>

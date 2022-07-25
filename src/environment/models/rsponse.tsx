@@ -24,8 +24,9 @@ export async function getResponseById(params:{
 
 
 export async function getResponseByClientId(params:{
-    clientId:string
+    clientId:string,
+    surveyId:string
 }) {
-    const url = `${Endpoints.Response.getResponseById}?clientId=${params.clientId}`
+    const url = `${Endpoints.Response.getResponseById}?clientId=${params.clientId}&surveyId=${params.surveyId}`
     return await axios.get(url)
 }

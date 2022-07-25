@@ -11,8 +11,9 @@ import { QuestionContainer } from './components/context/questionContext';
 import HomeComponent from './components/home';
 import SurveyReports from './components/surveyReports';
 import { HomeContainer } from './components/context/homePageContext';
-import {  RreportContainer } from './components/context/reportsContext';
+import { RreportContainer } from './components/context/reportsContext';
 import SurveyExitPage from './components/surveyExitPage';
+import ResponsesComponent from './components/responsesComponent';
 
 function App() {
   return (
@@ -21,17 +22,18 @@ function App() {
         <QuestionContainer>
           <HomeContainer>
             <RreportContainer>
-            <Routes>
-              {/* <Route index element={<HomeComponent />} /> */}
-              <Route path="home" element={<HomeComponent />}>
-                <Route path="sendEmail" element={<EmailComponent />} />
-                <Route path="createQuestion" element={<CreateQuestion />} />
-                <Route path="surveyReports" element={<SurveyReports />} />
-              </Route>
-              <Route path="customer/:id" element={<Dashboard />} />
-              <Route path="survey" element={<SurveyForm />} />
-              <Route path="exitPage" element={<SurveyExitPage />} />
-            </Routes>
+              <Routes>
+                {/* <Route index element={<HomeComponent />} /> */}
+                <Route path="home" element={<HomeComponent />}>
+                  <Route path="sendEmail" element={<EmailComponent />} />
+                  <Route path="createQuestion" element={<CreateQuestion />} />
+                  <Route path="surveyReports" element={<SurveyReports />} />
+                </Route>
+                <Route path="responseComponent" element={<ResponsesComponent />} />
+                <Route path="customer/:id" element={<Dashboard />} />
+                <Route path="survey" element={<SurveyForm />} />
+                <Route path="exitPage" element={<SurveyExitPage />} />
+              </Routes>
             </RreportContainer>
           </HomeContainer>
         </QuestionContainer>
