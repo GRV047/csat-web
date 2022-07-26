@@ -9,7 +9,7 @@ interface InputProviderProp {
 type questions = {
     question: string,
     response: any,
-    uniqueId: string,
+    questionId: string,
     expandableOptions: string[];
     id: string,
     time: number,
@@ -20,16 +20,20 @@ type questions = {
 type surveyContext = {
     responseArray: any[],
     clientId: string,
+    surveyId: string,
     setValue: (res: questions) => void
     saveClientId: (id: string) => void
+    saveSurveyId: (id: string) => void
 }
 
 //Creating context hear with type defined
 export const Survey = createContext<surveyContext>({
     responseArray: [],
     clientId: '',
+    surveyId: '',
     setValue: (res: questions) => { },
-    saveClientId: (res: string) => { }
+    saveClientId: (res: string) => { },
+    saveSurveyId: (res: string) => { }
 })
 
 
@@ -39,13 +43,15 @@ export const StateContainer = ({ children }: InputProviderProp) => {
     const [responseArray, setResponseArray] = useState([{
         question: "",
         response: "",
-        uniqueId: "",
+        questionId: "",
         id: "",
         time: new Date().getTime(),
         isParent: ""
     }])
 
     const [clientId, setClientId] = useState('');
+
+    const [surveyId, setSurveyId] = useState('');
 
     function setValue(objects: questions) {
         let index = 0;
@@ -67,7 +73,7 @@ export const StateContainer = ({ children }: InputProviderProp) => {
                 ...prevState, {
                     "question": objects.question,
                     "response": objects.response,
-                    "uniqueId": objects.uniqueId,
+                    "questionId": objects.questionId,
                     "id": objects.id,
                     "time": objects.time,
                     "isParent": objects.isParent
@@ -77,13 +83,17 @@ export const StateContainer = ({ children }: InputProviderProp) => {
 
     }
 
-    function saveClientId(id:string){
+    function saveClientId(id: string) {
         setClientId(id);
+    }
+
+    function saveSurveyId(id:string){
+        setSurveyId(id)
     }
 
     return (
         <>
-            <Survey.Provider value={{ setValue, responseArray, clientId, saveClientId }}>
+            <Survey.Provider value={{ setValue, responseArray, clientId, saveClientId, surveyId, saveSurveyId}}>
                 {children}
             </Survey.Provider>
         </>

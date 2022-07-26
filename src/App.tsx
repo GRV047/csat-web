@@ -30,7 +30,7 @@ function App() {
                   <Route path="surveyReports" element={<SurveyReports />} />
                 </Route>
                 <Route path="responseComponent" element={<ResponsesComponent />} />
-                <Route path="customer/:id" element={<Dashboard />} />
+                <Route path="customer/:id/survey/:id" element={<Dashboard />} />
                 <Route path="survey" element={<SurveyForm />} />
                 <Route path="exitPage" element={<SurveyExitPage />} />
               </Routes>

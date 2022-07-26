@@ -48,7 +48,7 @@ export default function SingleChoiceQuestion(props: any) {
         contexData.setValue({
             question: questionText,
             response: value,
-            uniqueId: _id,
+            questionId: _id,
             expandableOptions:expandableOptions,
             id:_id,
             time:new Date().getTime(),

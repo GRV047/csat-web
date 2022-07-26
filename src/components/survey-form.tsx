@@ -93,8 +93,9 @@ export default function SurveyForm() {
             }
         })
 
-        parameter.surveyResponse = resArray
+        parameter.responseJson = resArray
         parameter.customerId = response.clientId;
+        parameter.surveyId = response.surveyId;
 
         // getting Ip Aaddress of current device
         const ip = await axios.get("https://api.ipify.org?format=json&callback=getIP");
