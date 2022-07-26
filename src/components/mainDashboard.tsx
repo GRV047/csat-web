@@ -23,6 +23,12 @@ export function MainDashboard() {
         totalMailSent: 0
     });
 
+    const [attendesSurvey,setAttendedSurvey] = useState(0);
+
+    const [notAttendedSurvey, setNonAttendedSurvey] = useState(0);
+
+    
+
 
     useEffect(() => {
         console.log('1')
@@ -90,7 +96,7 @@ export function MainDashboard() {
                                 </div>
                             </div>
                             <div className="card-name">
-                                <h5 className="mb-1">Survey Details</h5>
+                                <h5 className="mb-1">Total Survey Conducted: {dashboardValue.totalSurveyConducted}</h5>
                             </div>
                         </div>
                     </div>

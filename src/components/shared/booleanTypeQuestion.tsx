@@ -38,7 +38,7 @@ export default function BooleanTeypeQuestion(props:any){
         contextData.setValue({
             question: questionText,
             response: value,
-            uniqueId: _id,
+            questionId: _id,
             expandableOptions:expandableOptions,
             id:_id,
             time:new Date().getTime(),
