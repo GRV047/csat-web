@@ -5,7 +5,7 @@ import { useReducer, useState } from "react";
 
 let values:string='';
 function reducer(state:any, addOption:any) {
-    console.log(addOption,state)
+    
     if(addOption.type){
         switch (addOption.type){
             case 'ADD':
@@ -15,12 +15,11 @@ function reducer(state:any, addOption:any) {
                         values
                     ]
                 }else{
-                    console.log(values)
+                    
                     values=values+addOption.value
                     return state;
                 }
             case 'REMOVE':
-                console.log(state);
                 return
             default:
                 return state

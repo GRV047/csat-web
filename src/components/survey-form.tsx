@@ -27,7 +27,6 @@ export default function SurveyForm() {
     // to get questions based on costomerId we are getting on the URL
     const questionDataSet = useContext(questionContext)
 
-    console.log(questionDataSet.clientData)
 
 
     let customerDetails = questionDataSet.clientData ?? {
@@ -105,7 +104,6 @@ export default function SurveyForm() {
         parameter.ipAddress = ip.data.ip
 
         // Consuming HTTP request for saving Data
-        console.log(parameter)
         const res: any = await saveResponse(parameter);
 
         // handling success and faliour of http request.

@@ -9,6 +9,7 @@ class Template {
 class SurveyController {
     readonly common = apiAtEndpoint + '/survey';
     readonly getCustomer = this.common + '/scheduleSurvey'
+    readonly surveyStates = this.common + '/surveyStates/'
 }
 
 class Response {

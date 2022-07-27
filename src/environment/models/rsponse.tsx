@@ -2,7 +2,6 @@ import axios from "axios";
 import { Endpoints } from "../api";
 
 export async function saveResponse(parameter:any){
-    console.log(JSON.stringify(parameter))
     const url=Endpoints.Response.common+`/${parameter.customerId}`;
     return await axios.post(url,parameter)
 }

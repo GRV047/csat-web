@@ -17,7 +17,7 @@ export default function ResponsesComponent() {
     //Featching all responses from context
     const respoponseDetails = useContext(ReportContext);
 
-    console.log(respoponseDetails.allResponse);
+    
 
     const rows = respoponseDetails.allResponse.map((element: {
         question: string,
