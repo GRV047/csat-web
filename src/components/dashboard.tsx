@@ -30,25 +30,31 @@ export default function Dashboard() {
 
         const preExistingResponse = await getResponseByClientId(params);
 
-        if (preExistingResponse.data.data.length === 0) {
-            contextData.saveClientId(splittedUrl[customerSection]) //new Changes
+        // console.log(JSON.stringify(preExistingResponse))
+        const setQuestionValues = await getData(splittedUrl[customerSection]);
 
-            contextData.saveSurveyId(splittedUrl[lastIndex]) // saving surveyId as well
-            const setQuestionValues = await getData(splittedUrl[customerSection]); //Old Convension. Although getting all details which are required
-            questionValues.setValue(setQuestionValues)
+        console.log(JSON.stringify(setQuestionValues))
+        // if (preExistingResponse.data.data.length === 0) {
+        //     contextData.saveClientId(splittedUrl[customerSection]) //new Changes
 
-            if (setQuestionValues.data.data.template.templateJson) {
-                setTimeout(() => {
-                    nav("/survey")
-                }, 1000)
-            }
-        }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Your Response Already Noted!',
-              })
-        }
+        //     contextData.saveSurveyId(splittedUrl[lastIndex]) // saving surveyId as well
+        //     const setQuestionValues = await getData(splittedUrl[customerSection]); //Old Convension. Although getting all details which are required
+        //     questionValues.setValue(setQuestionValues)
+
+        //     if (setQuestionValues.data.data.template.templateJson) {
+        //         setTimeout(() => {
+        //             nav("/survey")
+        //         }, 1000)
+        //     }
+        // }else{
+        //     Swal.fire({
+        //         icon: 'error',
+        //         title: 'Oops...',
+        //         text: 'Your Response Already Noted!',
+        //       })
+        // }
+
+        nav("/survey")
 
     }
 

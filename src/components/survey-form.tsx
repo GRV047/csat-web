@@ -14,6 +14,7 @@ import BooleanTeypeQuestion from "./shared/booleanTypeQuestion";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { dataSet } from "../dataset";
 
 export default function SurveyForm() {
 
@@ -47,7 +48,8 @@ export default function SurveyForm() {
     })
 
     //    Ggetting Question Array of Object containig nested  object.
-    let questions = questionDataSet.questionObject;
+    let questions = dataSet 
+    // questionDataSet.questionObject;
 
     // condition check weate what type of question it is
     questions.forEach((element, i) => {
@@ -79,53 +81,55 @@ export default function SurveyForm() {
 
         // creating Final Object to be send on End point URL.
 
-        let parameter: any = {
-            name: formValue.name,
-            company: formValue.company,
-            email: formValue.email,
-            comments: formValue.commants,
-        };
-        let resArray: any[] = []
-        response.responseArray.forEach(element => {
-            if (element.id !== '') {
-                resArray.push(element);
-            }
-        })
+        // let parameter: any = {
+        //     name: formValue.name,
+        //     company: formValue.company,
+        //     email: formValue.email,
+        //     comments: formValue.commants,
+        // };
+        // let resArray: any[] = []
+        // response.responseArray.forEach(element => {
+        //     if (element.id !== '') {
+        //         resArray.push(element);
+        //     }
+        // })
 
-        parameter.responseJson = resArray
-        parameter.customerId = response.clientId;
-        parameter.surveyId = response.surveyId;
+        // parameter.responseJson = resArray
+        // parameter.customerId = response.clientId;
+        // parameter.surveyId = response.surveyId;
 
-        // getting Ip Aaddress of current device
-        const ip = await axios.get("https://api.ipify.org?format=json&callback=getIP");
+        // // getting Ip Aaddress of current device
+        // const ip = await axios.get("https://api.ipify.org?format=json&callback=getIP");
 
-        // checking Final Object
+        // // checking Final Object
 
-        parameter.ipAddress = ip.data.ip
+        // parameter.ipAddress = ip.data.ip
 
-        // Consuming HTTP request for saving Data
-        const res: any = await saveResponse(parameter);
+        // // Consuming HTTP request for saving Data
+        // const res: any = await saveResponse(parameter);
 
-        // handling success and faliour of http request.
-        if (res.status === 201) {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: true,
-                timer: 2000
-            }).then(res=>{
-                nav("/exitPage");
-            })
-        } else {
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Something went wrong',
-                showConfirmButton: false,
-                timer: 2000
-            })
-        }
+        // // handling success and faliour of http request.
+        // if (res.status === 201) {
+        //     Swal.fire({
+        //         position: 'center',
+        //         icon: 'success',
+        //         title: 'Your work has been saved',
+        //         showConfirmButton: true,
+        //         timer: 2000
+        //     }).then(res=>{
+        //         nav("/exitPage");
+        //     })
+        // } else {
+        //     Swal.fire({
+        //         position: 'center',
+        //         icon: 'error',
+        //         title: 'Something went wrong',
+        //         showConfirmButton: false,
+        //         timer: 2000
+        //     })
+        // }
+
+        nav("/exitPage");
     }
 
     return (
