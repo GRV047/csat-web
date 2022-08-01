@@ -10,10 +10,10 @@ type questions = {
     question: string,
     response: any,
     questionId: string,
-    expandableOptions: string[];
-    id: string,
-    time: number,
-    isParent: string
+    expandableOptions: string[],
+    isParent: string,
+    status:boolean,
+    displayOrderArray:any
 }
 
 //Creating Context type
@@ -44,9 +44,9 @@ export const StateContainer = ({ children }: InputProviderProp) => {
         question: "",
         response: "",
         questionId: "",
-        id: "",
-        time: new Date().getTime(),
-        isParent: ""
+        isParent: "",
+        status:true,
+        displayOrderArr:[]
     }])
 
     const [clientId, setClientId] = useState('');
@@ -56,33 +56,34 @@ export const StateContainer = ({ children }: InputProviderProp) => {
     function setValue(objects: questions) {
         let index = 0;
         index = responseArray.length > 1 ?
-            responseArray.findIndex(val => val.id === objects.id)
-            : 0;
+        responseArray.findIndex(val => val.questionId === objects.questionId)
+        : 0;
+        
         if (index > 0) {
             responseArray[index].response = objects.response;
-            responseArray[index].time = objects.time;
             for (let i = index; i < responseArray.length; i++) {
                 const element = responseArray[i];
                 if (element.isParent.toLowerCase() === "no") {
-                    responseArray.splice(i, 1);
+                    element.status=false;
                 }
             }
-
+            
         } else {
             setResponseArray(prevState => [
                 ...prevState, {
                     "question": objects.question,
                     "response": objects.response,
                     "questionId": objects.questionId,
-                    "id": objects.id,
-                    "time": objects.time,
-                    "isParent": objects.isParent
+                    "isParent": objects.isParent,
+                    "status":objects.status,
+                    "displayOrderArr":objects.displayOrderArray
                 }
-            ]);
+            ]); 
         }
-
+        console.log("ENDING",responseArray)
     }
-
+    
+    console.log("THIS====>",responseArray);
     function saveClientId(id: string) {
         setClientId(id);
     }

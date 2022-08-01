@@ -13,14 +13,15 @@ export default function SingleChoiceQuestion(props: any) {
             questionText,
             options,
             expandableOptions,
-            uniqueId,
+            questionId,
             type,
             isParent,
             status,
-            subquestions
+            subquestions,
+            localDisplayOrder
         }
     } = props || {}
-
+    
     // ID Hook for generatingb dynamic ID
     const id = useId();
 
@@ -33,10 +34,16 @@ export default function SingleChoiceQuestion(props: any) {
 
     // Calling Event onChange; and setting value of selection
     // From chield component
+
+    /*
+    *******************************************************************************
+    
+    *******************************************************************************
+    */
     let count = (response.length) - 1
     const handelInput = (event: any) => {
         const value = event.target.value;
-
+        let dispOrderArr = localDisplayOrder.split(".")
         setResponse((prevRes: any) => [
             ...prevRes,
             {
@@ -44,15 +51,15 @@ export default function SingleChoiceQuestion(props: any) {
             }
         ])
 
-
+        console.log(response)
         contexData.setValue({
             question: questionText,
             response: value,
             questionId: _id,
             expandableOptions:expandableOptions,
-            id:_id,
-            time:new Date().getTime(),
-            isParent:isParent
+            isParent:isParent,
+            status:true,
+            displayOrderArray:dispOrderArr
         })
     }
     //veriable declaration for storing multiple

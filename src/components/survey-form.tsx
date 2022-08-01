@@ -87,7 +87,7 @@ export default function SurveyForm() {
         };
         let resArray: any[] = []
         response.responseArray.forEach(element => {
-            if (element.id !== '') {
+            if (element.questionId !== '') {
                 resArray.push(element);
             }
         })
@@ -103,29 +103,31 @@ export default function SurveyForm() {
 
         parameter.ipAddress = ip.data.ip
 
-        // Consuming HTTP request for saving Data
-        const res: any = await saveResponse(parameter);
+        console.log(parameter)
 
-        // handling success and faliour of http request.
-        if (res.status === 201) {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: true,
-                timer: 2000
-            }).then(res=>{
-                nav("/exitPage");
-            })
-        } else {
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Something went wrong',
-                showConfirmButton: false,
-                timer: 2000
-            })
-        }
+        // Consuming HTTP request for saving Data
+        // const res: any = await saveResponse(parameter);
+
+        // // handling success and faliour of http request.
+        // if (res.status === 201) {
+        //     Swal.fire({
+        //         position: 'center',
+        //         icon: 'success',
+        //         title: 'Your work has been saved',
+        //         showConfirmButton: true,
+        //         timer: 2000
+        //     }).then(res=>{
+        //         nav("/exitPage");
+        //     })
+        // } else {
+        //     Swal.fire({
+        //         position: 'center',
+        //         icon: 'error',
+        //         title: 'Something went wrong',
+        //         showConfirmButton: false,
+        //         timer: 2000
+        //     })
+        // }
     }
 
     return (

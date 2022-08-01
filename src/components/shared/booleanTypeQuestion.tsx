@@ -14,7 +14,8 @@ export default function BooleanTeypeQuestion(props:any){
             options,
             expandableOptions,
             isParent,
-            subquestions
+            subquestions,
+            localDisplayOrder
         }
     }=props||{}
 
@@ -26,7 +27,7 @@ export default function BooleanTeypeQuestion(props:any){
     let count = (response.length) - 1
     function handelInput(event:any){
         const value = event.target.value;
-
+        let dispOrderArr = localDisplayOrder.split(".")
         setResponse((prevRes: any) => [
             ...prevRes,
             {
@@ -40,9 +41,9 @@ export default function BooleanTeypeQuestion(props:any){
             response: value,
             questionId: _id,
             expandableOptions:expandableOptions,
-            id:_id,
-            time:new Date().getTime(),
-            isParent:isParent
+            isParent:isParent,
+            status:true,
+            displayOrderArray:dispOrderArr
         })
     }
 

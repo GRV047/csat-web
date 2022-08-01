@@ -25,8 +25,8 @@ export function MainDashboard() {
     });
 
 
-    let attended = homeContext.surveyStatus.attended;
-    let notAttended = homeContext.surveyStatus.notAttended
+    let attended = homeContext.surveyStatus.attended??[];
+    let notAttended = homeContext.surveyStatus.notAttended??[];
 
     useEffect(() => {
         
