@@ -53,7 +53,6 @@ export default function ResponseComponent(props: {
 
     async function viewResponses(e: any) {
         e.preventDefault();
-        console.log(e.target.value)
         let param = {
             surveyId: e.target.value,
             clientId: props.customerDetails._id

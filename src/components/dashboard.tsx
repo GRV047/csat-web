@@ -28,27 +28,33 @@ export default function Dashboard() {
             surveyId: splittedUrl[lastIndex]
         }
 
-        const preExistingResponse = await getResponseByClientId(params);
+        // const preExistingResponse = await getResponseByClientId(params);
 
-        if (preExistingResponse.data.data.length === 0) {
-            contextData.saveClientId(splittedUrl[customerSection]) //new Changes
+        // // console.log(JSON.stringify(preExistingResponse))
+        // const setQuestionValues = await getData(splittedUrl[customerSection]);
 
-            contextData.saveSurveyId(splittedUrl[lastIndex]) // saving surveyId as well
-            const setQuestionValues = await getData(splittedUrl[customerSection]); //Old Convension. Although getting all details which are required
-            questionValues.setValue(setQuestionValues)
+        // console.log(JSON.stringify(setQuestionValues))
+        // if (preExistingResponse.data.data.length === 0) {
+        //     contextData.saveClientId(splittedUrl[customerSection]) //new Changes
 
-            if (setQuestionValues.data.data.template.templateJson) {
-                setTimeout(() => {
-                    nav("/survey")
-                }, 1000)
-            }
-        }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Your Response Already Noted!',
-              })
-        }
+        //     contextData.saveSurveyId(splittedUrl[lastIndex]) // saving surveyId as well
+        //     const setQuestionValues = await getData(splittedUrl[customerSection]); //Old Convension. Although getting all details which are required
+        //     questionValues.setValue(setQuestionValues)
+
+        //     if (setQuestionValues.data.data.template.templateJson) {
+        //         setTimeout(() => {
+        //             nav("/survey")
+        //         }, 1000)
+        //     }
+        // }else{
+        //     Swal.fire({
+        //         icon: 'error',
+        //         title: 'Oops...',
+        //         text: 'Your Response Already Noted!',
+        //       })
+        // }
+
+        nav("/survey")
 
     }
 
@@ -66,13 +72,12 @@ export default function Dashboard() {
                 <div className="content_box">
                     <Header />
                     <div className="text_area">
-                        <div className="text_inner_container mt-4">
+                        <div className="text_inner_container mt-2">
                             <h4>Thank you for being a valuable customer, we appreciate your business with Successive Technologies.</h4>
-                            <br />
                             <h4>We always want to improve — could you help us out for a few minutes and let us know about your experience working with us?</h4>
                         </div>
                     </div>
-                    <button className="btn btn-dark mt-5 mb-4 button_margin" onClick={redirectToSurvey}>Sure, Let's Start</button>
+                    <button className="btn btn-dark button_margin" onClick={redirectToSurvey}>Sure, Let's Start</button>
                 </div>
             </div>
         </>

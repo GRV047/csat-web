@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
@@ -21,6 +21,7 @@ import { Outlet } from "react-router-dom";
 import './css/home.css';
 import { HomeContext } from "./context/homePageContext";
 import { MainDashboard } from "./mainDashboard";
+import { surveyStates } from "../environment/models/surveyController";
 
 
 const drawerWidth = 240;
@@ -75,12 +76,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function HomeComponent() {
     const homeContext = useContext(HomeContext)
-    console.log(homeContext.isVisible)
+
     const [open, setOpen] = useState(true);
 
     const toggleDrawer = () => {
         setOpen(!open);
     };
+
+    useEffect(()=>{
+        homeContext.setSurveyStatus();
+    },[])
 
     return (
         <>

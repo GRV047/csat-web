@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Endpoints } from '../environment/api';
+import { HomeContext } from './context/homePageContext';
 import './css/home.css'
 
 type dashboardValues = {
@@ -13,7 +14,7 @@ type dashboardValues = {
 }
 
 export function MainDashboard() {
-
+    const homeContext = useContext(HomeContext)
     const [dashboardValue, setDashboardValue] = useState({
         totalTemplate: 1,
         totalCustomer: 9,
@@ -23,19 +24,14 @@ export function MainDashboard() {
         totalMailSent: 0
     });
 
-    const [attendesSurvey,setAttendedSurvey] = useState(0);
 
-    const [notAttendedSurvey, setNonAttendedSurvey] = useState(0);
-
-    
-
+    let attended = homeContext.surveyStatus.attended;
+    let notAttended = homeContext.surveyStatus.notAttended
 
     useEffect(() => {
-        console.log('1')
         
             axios.get(Endpoints.Template.getAllTemplateCount)
             .then((res:any)=>{
-                console.log(res)
                 let template:number=res.data.data.templateCount
                 let customer:number = res.data.data.customerCount
                 let survey:number = res.data.data.surveyCount
@@ -52,6 +48,7 @@ export function MainDashboard() {
             }).catch(err=>{
                 console.log(err);
             })
+
     }, [])
 
 
@@ -82,16 +79,16 @@ export function MainDashboard() {
                             <div className="my-card">
                                 <div className="d-flex justify-content-around w-100">
                                     <div className="my-auto px-4 text-center">
-                                        <h2>{dashboardValue.totalCustomer}</h2>
-                                        <h6 className="mt-1">Total Customer</h6>
+                                        <h2>{attended.length}</h2>
+                                        <h6 className="mt-1">Total Attended Survey</h6>
                                     </div>
                                     <div className="my-auto px-3 text-center">
                                         <h2></h2>
                                         <h6 className="mt-1"></h6>
                                     </div>
                                     <div className="my-auto px-3 text-center">
-                                        <h2>{dashboardValue.totalSurveyConducted}</h2>
-                                        <h6 className="mt-1">Total Survey Conducts</h6>
+                                        <h2>{notAttended.length}</h2>
+                                        <h6 className="mt-1">Total Non Attended Survey</h6>
                                     </div>
                                 </div>
                             </div>
