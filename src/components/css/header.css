@@ -1,4 +1,6 @@
-.intro_text{
-    display: flex;
-    justify-content: center;
+
+.intro_text h2 {
+    margin: 0;
+    position: relative;
+    padding-bottom: 50px;
 }

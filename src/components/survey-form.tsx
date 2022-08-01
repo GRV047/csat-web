@@ -136,10 +136,12 @@ export default function SurveyForm() {
         <>
             <div className="main_div">
                 <div className="content_box">
-                    <Header />
-                    <div className="question_container mb-5">
+                    <div className="question_container">
                         <div className="container">
                             <div className="row">
+                                <div className="col-12">
+                                    <Header />
+                                </div>
                                 <div className="col-lg-4">
                                     <Label labelName="name"
                                         className="form-label" text="Name" />
@@ -168,21 +170,24 @@ export default function SurveyForm() {
                             </div>
 
                             <div className="row">
-                                {questionArea}
+                                <div className="col-12">
+                                    {questionArea}
+                                </div>
                             </div>
 
                             <div className="row mt-5">
-                                <TextAreaSection id={id}
-                                    name={"commants"}
-                                    rows={4}
-                                    cols={40}
-                                    placeHolder={"Please enter your feedback"}
-                                    value={formValue.commants}
-                                    onChange={handelInput} />
-                            </div>
-
-                            <div className="row button">
-                                <button className="btn btn-dark mt-5 survey_button" onClick={sumbmitForm}>Submit</button>
+                                <div className="col-12">
+                                    <TextAreaSection id={id}
+                                        name={"commants"}
+                                        rows={4}
+                                        cols={40}
+                                        placeHolder={"Please enter your feedback"}
+                                        value={formValue.commants}
+                                        onChange={handelInput} />
+                                </div>
+                                <div className="survey_button_wrp">
+                                    <button className="btn btn-dark survey_button" onClick={sumbmitForm}>Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
