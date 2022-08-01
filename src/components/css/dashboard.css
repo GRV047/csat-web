@@ -3,29 +3,47 @@
     padding: 0;
     display: flex;
     justify-content: center;
+    background: url(../../media/images/Customer-Survey.jpg);
+    align-items: center;
+    height: 100vh;
+    position: relative;
 }
+/* .main_div:before {
+    content: "";
+    background: #00000052;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+} */
 
 .button_margin{
-    margin:0;
+    margin: 0;
+    height: auto;
+    background: #f30e0e;
+    width: auto;
+    padding: 10px 30px;
+    font-weight: 600;
+    border: none;
 }
-
+.button_margin:hover {
+    background: #fff;
+    color: #333;
+}
 .content_box {
-    border: solid 1px black;
-    width: 70%;
-    height:auto;
-    margin: 5% 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 5%;
+    border: solid 1px rgb(255 255 255 / 36%);
+    width: 50%;
+    height: auto;
+    margin: 0;
+    border-radius: 10px;
+    background: rgb(0 0 0 / 32%);
     box-sizing: border-box;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    box-shadow: 0px 0px 40px rgb(255 255 255 / 31%);
+    padding: 40px 50px;
+    color: #fff;
+    position: relative;
 }
 
-.intro_text{
-    display: flex;
-    justify-content: center;
-}
 
 .text_area{
     display: flex;
@@ -33,7 +51,25 @@
     align-items: center;
 }
 
-.text_inner_container{
-    width: 75%;
-    height: 30vh;
+.text_inner_container h4 {
+    font-weight: normal;
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: normal;
+}
+
+.intro_text h2:after {
+    content: "";
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    margin: auto;
+    width: 80px;
+    height: 5px;
+    background-image: -o-linear-gradient(left, #ffe11a, #fe0000);
+    background-image: -webkit-gradient(linear, left top, right top, from(#ffe11a), to(#fe0000));
+    background-image: linear-gradient(to right, #ffe11a, #fe0000);
+}
+.text_inner_container.intro_text h2:after {
+    right: 0;
 }

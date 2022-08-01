@@ -14,6 +14,7 @@ import BooleanTeypeQuestion from "./shared/booleanTypeQuestion";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { dataSet } from "../dataset";
 
 export default function SurveyForm() {
 
@@ -51,13 +52,13 @@ export default function SurveyForm() {
 
     // condition check weate what type of question it is
     questions.forEach((element, i) => {
-        if (element.type === 2) {
+        if (element.questionType === 2) {
             questionArea.push(
                 <div className="question_box mt-4" key={i}>
                     <SingleChoiceQuestion questionObject={element} />
                 </div>
             )
-        } else if (element.type === 4) {
+        } else if (element.questionType === 4) {
             <div className="question_box mt-4">
                 <BooleanTeypeQuestion questionObject={element} />
             </div>
@@ -87,7 +88,7 @@ export default function SurveyForm() {
         };
         let resArray: any[] = []
         response.responseArray.forEach(element => {
-            if (element.questionId !== '') {
+            if (element.id !== '') {
                 resArray.push(element);
             }
         })
@@ -103,41 +104,42 @@ export default function SurveyForm() {
 
         parameter.ipAddress = ip.data.ip
 
-        console.log(parameter)
-
         // Consuming HTTP request for saving Data
-        // const res: any = await saveResponse(parameter);
+        const res: any = await saveResponse(parameter);
 
-        // // handling success and faliour of http request.
-        // if (res.status === 201) {
-        //     Swal.fire({
-        //         position: 'center',
-        //         icon: 'success',
-        //         title: 'Your work has been saved',
-        //         showConfirmButton: true,
-        //         timer: 2000
-        //     }).then(res=>{
-        //         nav("/exitPage");
-        //     })
-        // } else {
-        //     Swal.fire({
-        //         position: 'center',
-        //         icon: 'error',
-        //         title: 'Something went wrong',
-        //         showConfirmButton: false,
-        //         timer: 2000
-        //     })
-        // }
+        // handling success and faliour of http request.
+        if (res.status === 201) {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: true,
+                timer: 2000
+            }).then(res=>{
+                nav("/exitPage");
+            })
+        } else {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Something went wrong',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
+
     }
 
     return (
         <>
             <div className="main_div">
                 <div className="content_box">
-                    <Header />
-                    <div className="question_container mb-5">
+                    <div className="question_container">
                         <div className="container">
                             <div className="row">
+                                <div className="col-12">
+                                    <Header />
+                                </div>
                                 <div className="col-lg-4">
                                     <Label labelName="name"
                                         className="form-label" text="Name" />
@@ -166,21 +168,24 @@ export default function SurveyForm() {
                             </div>
 
                             <div className="row">
-                                {questionArea}
+                                <div className="col-12">
+                                    {questionArea}
+                                </div>
                             </div>
 
                             <div className="row mt-5">
-                                <TextAreaSection id={id}
-                                    name={"commants"}
-                                    rows={4}
-                                    cols={40}
-                                    placeHolder={"Please enter your feedback"}
-                                    value={formValue.commants}
-                                    onChange={handelInput} />
-                            </div>
-
-                            <div className="row button">
-                                <button className="btn btn-dark mt-5 survey_button" onClick={sumbmitForm}>Submit</button>
+                                <div className="col-12">
+                                    <TextAreaSection id={id}
+                                        name={"commants"}
+                                        rows={4}
+                                        cols={40}
+                                        placeHolder={"Please enter your feedback"}
+                                        value={formValue.commants}
+                                        onChange={handelInput} />
+                                </div>
+                                <div className="survey_button_wrp">
+                                    <button className="btn btn-dark survey_button" onClick={sumbmitForm}>Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
