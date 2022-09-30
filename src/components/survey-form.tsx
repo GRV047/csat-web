@@ -44,34 +44,54 @@ export default function SurveyForm() {
         name: customerDetails.firstName + ' ' + customerDetails.lastName,
         company: customerDetails.project,
         email: customerDetails.email,
-        commants: ""
     })
 
-    //    Ggetting Question Array of Object containig nested  object.
-    let questions = questionDataSet.questionObject;
+    const [comment, setComment] = useState("")
 
-    // condition check weate what type of question it is
-    questions.forEach((element, i) => {
-        if (element.questionType === 2) {
-            questionArea.push(
-                <div className="question_box mt-4" key={i}>
-                    <SingleChoiceQuestion questionObject={element} />
-                </div>
-            )
-        } else if (element.questionType === 4) {
-            <div className="question_box mt-4">
-                <BooleanTeypeQuestion questionObject={element} />
-            </div>
-        }
-    })
 
-    // managing input state for Form Value
     const handelInput = (e: any) => {
         const key = e.target.name;
         const value = e.target.value;
 
         setFormValue({ ...formValue, [key]: value });
     }
+
+    const handelComment = (e: any) => {
+        const key = e.target.name;
+        const value = e.target.value;
+        console.log(value)
+        setComment(value);
+    }
+
+    // Ggetting Question Array of Object containig nested  object.
+    let questions = questionDataSet.questionObject;
+
+    let feedback: any[] = []
+    // condition check weate what type of question it is
+    questions.forEach((element, i) => {
+        if (element.questionType === 2 && element.isParent === 'Yes') {
+            questionArea.push(
+                <div className="question_box mt-4" key={i}>
+                    <SingleChoiceQuestion questionObject={element} />
+                </div>
+            )
+        } else if (element.questionType === 4 && element.isParent === 'Yes') {
+            questionArea.push(
+                <div className="question_box mt-4">
+                    <BooleanTeypeQuestion questionObject={element} />
+                </div>
+            )
+        } else if (element.questionType === 3 && element.isParent === 'Yes') {
+            feedback.push(element)
+            questionArea.push(
+                <div className="question_box mt-4">
+                    <TextAreaSection questionObject={element} onChange={handelComment} value={comment} />
+                </div>
+            )
+        }
+    })
+
+    // managing input state for Form Value
 
 
     // Form Submit Operations
@@ -84,11 +104,10 @@ export default function SurveyForm() {
             name: formValue.name,
             company: formValue.company,
             email: formValue.email,
-            comments: formValue.commants,
         };
         let resArray: any[] = []
         response.responseArray.forEach(element => {
-            if (element.id !== '') {
+            if (element.questionId !== '') {
                 resArray.push(element);
             }
         })
@@ -97,13 +116,22 @@ export default function SurveyForm() {
         parameter.customerId = response.clientId;
         parameter.surveyId = response.surveyId;
 
+
+        parameter.responseJson.push({
+            "question": feedback[0].questionText,
+            "response": comment,
+            "questionId": feedback[0]._id,
+            "isParent": feedback[0].isParent,
+            "status": true,
+            "displayOrderArr": []
+        })
         // getting Ip Aaddress of current device
         const ip = await axios.get("https://api.ipify.org?format=json&callback=getIP");
 
         // checking Final Object
 
         parameter.ipAddress = ip.data.ip
-
+        console.log(JSON.stringify(parameter, null, 2))
         // Consuming HTTP request for saving Data
         const res: any = await saveResponse(parameter);
 
@@ -115,7 +143,7 @@ export default function SurveyForm() {
                 title: 'Your work has been saved',
                 showConfirmButton: true,
                 timer: 2000
-            }).then(res=>{
+            }).then(res => {
                 nav("/exitPage");
             })
         } else {
@@ -174,7 +202,7 @@ export default function SurveyForm() {
                             </div>
 
                             <div className="row mt-5">
-                                <div className="col-12">
+                                {/* <div className="col-12">
                                     <TextAreaSection id={id}
                                         name={"commants"}
                                         rows={4}
@@ -182,7 +210,7 @@ export default function SurveyForm() {
                                         placeHolder={"Please enter your feedback"}
                                         value={formValue.commants}
                                         onChange={handelInput} />
-                                </div>
+                                </div> */}
                                 <div className="survey_button_wrp">
                                     <button className="btn btn-dark survey_button" onClick={sumbmitForm}>Submit</button>
                                 </div>
