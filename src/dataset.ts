@@ -1,3 +1,5 @@
+import { dropdownObject } from "./components/constants/type"
+
 export const dataSet = [
     {
        "_id":"62bc5102cdd79e5f9ba6d69d",
@@ -104,7 +106,36 @@ export const dataSet = [
     }
  ]
 
-
+export const MENU_ITEMS:dropdownObject[]=[
+   {
+      "typeName":"Multiple Choice",
+      "type":1
+   },
+   {
+      "typeName":"Single Selection",
+      "type":2
+   },
+   {
+      "typeName":"Numarical Input",
+      "type":3
+   },
+   {
+      "typeName":"Text Input",
+      "type":4
+   },
+   {
+      "typeName":"Boolean",
+      "type":5
+   },
+   {
+      "typeName":"Text Area",
+      "type":6
+   },
+   {
+      "typeName":"Calender",
+      "type":7
+   }
+]
 // [
 //     {
 //         "_id":"101",

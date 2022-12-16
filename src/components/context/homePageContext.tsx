@@ -33,7 +33,6 @@ export function HomeContainer({ children }: InputProviderProp) {
 
     async function setSurveyStatus() {
         const response = await surveyStates();
-        console.log(response)
         setSurveyStatusData(response.data.data);
     }
 

@@ -14,6 +14,7 @@ import { HomeContainer } from './components/context/homePageContext';
 import { RreportContainer } from './components/context/reportsContext';
 import SurveyExitPage from './components/surveyExitPage';
 import ResponsesComponent from './components/responsesComponent';
+import CreateAssessment from './components/createAssessment';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path="responseComponent" element={<ResponsesComponent />} />
                 <Route path="customer/:id/survey/:id" element={<Dashboard />} />
                 <Route path="survey" element={<SurveyForm />} />
+                <Route path="createQuestion" element={<CreateAssessment />} />
                 <Route path="exitPage" element={<SurveyExitPage />} />
               </Routes>
             </RreportContainer>

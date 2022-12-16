@@ -1,4 +1,4 @@
 export const ENVIRONMENT = {
-    url:"http://localhost:8080",
+    url:process.env.END_POINT_URL,
     type:"local"
 }   

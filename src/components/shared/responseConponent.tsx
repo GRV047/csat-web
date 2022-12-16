@@ -64,7 +64,6 @@ export default function ResponseComponent(props: {
         nav("/responseComponent");
     }
 
-    console.log(rows)
     return (
         <>
             <div style={{ height: 400, width: '100%' }} className="mt-5">

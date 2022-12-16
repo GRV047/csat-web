@@ -51,7 +51,6 @@ export default function SingleChoiceQuestion(props: any) {
             }
         ])
 
-        console.log(response)
         contexData.setValue({
             question: questionText,
             response: value,

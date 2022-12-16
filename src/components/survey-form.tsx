@@ -59,7 +59,6 @@ export default function SurveyForm() {
     const handelComment = (e: any) => {
         const key = e.target.name;
         const value = e.target.value;
-        console.log(value)
         setComment(value);
     }
 
@@ -131,7 +130,6 @@ export default function SurveyForm() {
         // checking Final Object
 
         parameter.ipAddress = ip.data.ip
-        console.log(JSON.stringify(parameter, null, 2))
         // Consuming HTTP request for saving Data
         const res: any = await saveResponse(parameter);
 

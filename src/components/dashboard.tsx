@@ -30,10 +30,8 @@ export default function Dashboard() {
 
         const preExistingResponse = await getResponseByClientId(params);
 
-        // console.log(JSON.stringify(preExistingResponse))
         const setQuestionValues = await getData(splittedUrl[customerSection]);
 
-        console.log(JSON.stringify(setQuestionValues))
         if (preExistingResponse.data.data.length === 0) {
             contextData.saveClientId(splittedUrl[customerSection]) //new Changes
 

@@ -80,10 +80,8 @@ export const StateContainer = ({ children }: InputProviderProp) => {
                 }
             ]); 
         }
-        console.log("ENDING",responseArray)
     }
     
-    console.log("THIS====>",responseArray);
     function saveClientId(id: string) {
         setClientId(id);
     }
